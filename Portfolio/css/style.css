@@ -41,7 +41,7 @@ p {
   text-align: center;
 }
 section {
-  height: calc(100vh - 57px);
+  height: 100vh;
   width: 100%;
   margin: inherit;
 }
@@ -63,6 +63,41 @@ header {
 header a:hover {
   color: var(--dark_color);
 }
+label {
+  display: block;
+}
+input,
+textarea {
+  width: 25rem;
+  height: 5rem;
+  border-radius: 5px;
+  background-color: rgb(219, 219, 219);
+  font-size: 2rem;
+  color: var(--dark_color);
+}
+textarea {
+  width: 30rem;
+  height: 10rem;
+  border: 1.5px solid black;
+}
+button {
+  padding: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 3rem;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.09);
+  color: white;
+  transition: all 0.2s linear 0s;
+}
+button:hover {
+  color: var(--dark_color);
+  transform: scale(1.5);
+}
+form {
+  transform: translateY(-7rem);
+}
+
 footer {
   transform: translateY(17px);
   height: 7vh;
@@ -73,6 +108,10 @@ footer {
 }
 footer > h2 {
   color: var(--lightbrown);
+  font-size: 2.5rem;
+}
+i {
+  margin-right: 0.5rem;
 }
 
 /* special class in order to make the same deisgn */
@@ -99,9 +138,8 @@ footer > h2 {
 /* first page design */
 
 #page1 {
-  height: 100vh;
-  position: relative;
   display: flex;
+  position: relative;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -124,7 +162,6 @@ footer > h2 {
   text-align: center;
 }
 #page1 h1 {
-  padding: 15rem inherit;
   font-size: 7rem;
   animation: show-h1 1.5s ease-out 0s 1 alternate forwards;
   padding-top: 15rem;
@@ -148,7 +185,6 @@ footer > h2 {
 .arrow a {
   padding: 0;
 }
-
 .arrow > a > div {
   width: 3vw;
   height: 3vw;
@@ -176,6 +212,7 @@ footer > h2 {
 /* second page design */
 #page2 {
   background-color: #938e937c;
+  height: calc(100vh - 57px);
 }
 .page2-info {
   width: 100%;
@@ -202,8 +239,8 @@ footer > h2 {
 }
 .page2-grid {
   display: grid;
-  max-width: 70rem;
-  max-height: 70rem;
+  max-width: 73rem;
+  max-height: fit-content;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(9, 1fr);
   grid-gap: 2rem;
@@ -225,7 +262,6 @@ footer > h2 {
 .grid2 ul {
   display: block;
   color: var(--darkblue);
-  /* list-style: <i class= "fas fa-check" ></i>; */
 }
 .grid2 li {
   font-size: 2rem;
@@ -264,4 +300,98 @@ footer > h2 {
 }
 .client_quote {
   padding: 0.5rem 1.5rem;
+}
+/* third page design */
+#page3 {
+  background-color: var(--lightbrown);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#page3 > .page3-h1 {
+  margin-top: 15rem;
+}
+#page3 div {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Display for Smartphones */
+@media screen and (max-width: 500px) {
+  :root {
+    font-size: 7px;
+  }
+  .logo {
+    left: 41%;
+    top: 59%;
+    position: absolute;
+  }
+  .page1-bio {
+    visibility: hidden;
+  }
+  .arrow {
+    right: 40%;
+  }
+  .arrow p {
+    margin-bottom: 2rem;
+    transform: translateX(-1rem);
+  }
+  header ul {
+    flex-direction: column;
+    text-align: center;
+  }
+  header {
+    z-index: 1;
+    opacity: 0.8;
+  }
+  .page2-info {
+    flex-direction: column;
+  }
+  .page2-leftside {
+    transform: translateY(30px);
+  }
+  #page2,
+  .page2-info {
+    height: max-content;
+  }
+  .page2-grid {
+    display: inline;
+  }
+  #page2 ul {
+    text-align: center;
+  }
+}
+/* Display for tablets */
+@media screen and (min-width: 501px) and (max-width: 1200px) {
+  #page2,
+  #page3 {
+    position: relative;
+  }
+
+  #page2 {
+    height: max-content;
+  }
+  .page2-leftside {
+    transform: translateY(60px);
+  }
+  .page2-info {
+    flex-direction: column;
+    height: max-content;
+  }
+  #page2 ul {
+    text-align: center;
+  }
+  footer {
+    position: absolute;
+    bottom: -10%;
+    width: 100vw;
+    transform: translateY(-40px);
+  }
+  .page2-grid {
+    display: inline;
+    margin-bottom: 20px;
+  }
 }
