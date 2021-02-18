@@ -172,6 +172,9 @@ a > p {
   height: 3rem;
   background-position: -6rem -34rem;
 }
+.search {
+  padding-top: 0.5rem;
+}
 .search-button {
   width: 3.5rem;
   height: 4rem;
@@ -180,7 +183,7 @@ a > p {
   color: black;
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
-  transform: translateX(-0.5rem);
+  transform: translateY(-0.5rem);
 }
 .top-header > .right_top_header {
   display: flex;
