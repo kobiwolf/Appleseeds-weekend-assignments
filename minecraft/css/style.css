@@ -1,0 +1,215 @@
+* {
+  box-sizing: border-box;
+  padding: 0%;
+  margin: 0%;
+}
+@font-face {
+  font-family: 'mineCraft';
+  src: url(../fonts/Minecraft.ttf);
+}
+:root {
+  font-size: 10px;
+}
+/* design by tag */
+body {
+  height: 100vh;
+}
+h2 {
+  font-family: 'mineCraft';
+  font-size: 2rem;
+  color: white;
+}
+section {
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+}
+/* welcome page design */
+.firstpage {
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/wlecomejpg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+.firstpage::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  opacity: 0;
+  animation: show 0.5s linear 1s 1 forwards alternate;
+}
+
+.box-page1 {
+  width: 70%;
+  height: 70%;
+  background-color: rgba(128, 128, 128, 0.3);
+  box-shadow: 0 0 1px black;
+  border-radius: 10%;
+  z-index: 2;
+  opacity: 0;
+  animation: show 0.5s linear 1s 1 forwards alternate;
+  display: grid;
+  grid-template-areas:
+    'left middle right'
+    'left middle right'
+    'left middle right'
+    'left middle right';
+}
+
+.middle-box > div > * {
+  height: max-content;
+  padding: 2rem 4rem;
+  background-color: transparent;
+  font-family: 'mineCraft';
+  font-size: 2rem;
+  text-decoration: none;
+  color: white;
+}
+.middle-box > div > * :hover {
+  cursor: pointer;
+}
+.left-box,
+.right-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+.left-box {
+  grid-area: left;
+}
+.right-box {
+  grid-area: right;
+}
+.right-box > div,
+.left-box > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-box > div > div,
+.left-box > div > div {
+  width: 7rem;
+  height: 7rem;
+  background-size: 100% 100%;
+}
+.axe {
+  background-image: url('../img/axe.png');
+}
+.wood {
+  background-image: url('../img/wood.jfif');
+}
+.pickaxe {
+  background-image: url('../img/pickaxe.png');
+}
+.stone {
+  background-image: url('../img/stone.jfif');
+}
+.hammer {
+  background-image: url('../img/hammer.png');
+}
+.bracet {
+  background-image: url('../img/house.jfif');
+}
+.sword {
+  background-image: url('../img/sword.png');
+}
+.death {
+  background-image: url('../img/death.png');
+}
+.shovel {
+  background-image: url('../img/shovel.png');
+}
+.dirt {
+  background-image: url('../img/dirt.jfif');
+  transform: translateX(-3rem);
+  position: relative;
+}
+.dirt::after {
+  content: '';
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  left: 100%;
+  top: 0;
+  background-image: url('../img/leaves.png');
+  background-size: 100% 100%;
+}
+.water {
+  background-image: url('../img/water.png');
+}
+.fire {
+  background-image: url('../img/fire.jfif');
+}
+.middle-box {
+  grid-area: middle;
+  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+}
+.middle-box > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+}
+/* first page animations */
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+/* the game page design */
+.game {
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+}
+.navbar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.left-nav > div,
+.middle-nav > div {
+  width: 5rem;
+  height: 5rem;
+  background-size: 100% 100%;
+}
+.left-nav {
+  grid-column: 1 / span 2;
+  padding: 3rem 9rem;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+.middle-nav {
+  grid-column: 3 / span 2;
+}
+
+/* media @ */
+@media screen and (max-width: 670px) {
+  :root {
+    font-size: 5px;
+  }
+}
+@media screen and (max-width: 450px) {
+  :root {
+    font-size: 5px;
+  }
+  .box-page1 {
+    grid-template-areas:
+      'left  right'
+      'left  right'
+      'middle middle ';
+  }
+}
