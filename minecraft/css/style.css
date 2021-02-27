@@ -36,6 +36,9 @@ p {
 .currentTool {
   border: 1px white solid;
 }
+.sky {
+  background-color: #8dbfff;
+}
 /* welcome page design */
 .firstpage {
   width: 100%;
@@ -117,7 +120,7 @@ p {
 .axe {
   background-image: url('../img/axe.png');
 }
-.wood {
+.after {
   background-image: url('../img/wood.jfif');
   transform: translateX(-3rem);
   position: relative;
@@ -131,6 +134,9 @@ p {
   top: 0;
   background-image: url('../img/leaves.png');
   background-size: 100% 100%;
+}
+.wood {
+  background-image: url('../img/wood.jfif');
 }
 .pickaxe {
   background-image: url('../img/pickaxe.png');
@@ -208,9 +214,11 @@ p {
 }
 .topland {
   background-image: url('../img/topland.jpg');
+  background-size: 100% 100%;
 }
 .leaves {
   background-image: url('../img/leaves.png');
+  background-size: 100% 100%;
 }
 
 .left-nav {
@@ -232,12 +240,20 @@ p {
 }
 /* the world design */
 .world {
+  width: 70%;
+  height: 100%;
+  background-color: grey;
+  margin: auto;
   display: grid;
+  gap: 0;
 }
 /* media @ */
 @media screen and (max-width: 670px) {
   :root {
     font-size: 5px;
+  }
+  .world {
+    width: 100vw;
   }
 }
 @media screen and (max-width: 450px) {
@@ -250,7 +266,7 @@ p {
       'left  right'
       'middle middle ';
   }
-  .navbar {
+  .navbar > div {
     transform: translateX(-5rem);
   }
   .middle-nav {
@@ -258,5 +274,8 @@ p {
   }
   .restartBut {
     transform: translateY(-3rem);
+  }
+  .world {
+    width: 100vw;
   }
 }
