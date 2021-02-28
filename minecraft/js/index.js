@@ -6,6 +6,16 @@ let restartBut = document.querySelector('.restartBut');
 let world = document.querySelector('.world');
 let exit = document.querySelector('.exit');
 
+// state
+let tools = {
+  axe: ['wood', 'leaves'],
+  pickaxe: ['stone'],
+  water: ['fire'],
+  shovel: ['dirt', 'topland'],
+  sword: ['death'],
+  hammer: ['bracet'],
+};
+
 // functions
 function startOver() {
   makeMap(4, 44, 25);
@@ -51,19 +61,10 @@ function makeHouse(row, col) {
 function makeFire(row, col) {
   loopsForFuncs(row, col, 2, 1, 'fire');
 }
-function makeSky(div) {
-  div.classList.add('sky');
-}
-function makeDirt(div) {
-  div.classList.add('dirt');
-}
-function makeTopLand(div) {
-  div.classList.add('topland');
-}
-function makeGhost(div) {
-  div.classList.add('death');
-}
 
+function makeSpecial(div, string) {
+  div.classList.add(string);
+}
 function checkIfExsitAndPush(div, arr) {
   div && arr.push(div);
 }
@@ -82,10 +83,8 @@ function checkIfReachable(div) {
   return booli;
 }
 function makeMap(landRows, width = 44, heigth = 25) {
-  // let cubeW = Math.floor(world.scrollWidth / 30);
-  // let cubeH = Math.floor(world.scrollHeight / 30);
-  cubeW = width;
-  cubeH = heigth;
+  const cubeW = width;
+  const cubeH = heigth;
   world.style.gridTemplateColumns = `repeat(${cubeW},1fr)`;
   world.style.gridTemplateRows = `repeat(${cubeH},1fr)`;
   for (let row = cubeH; row >= 1; row--) {
@@ -102,17 +101,17 @@ function makeMap(landRows, width = 44, heigth = 25) {
         (row === 15 && col === 4) ||
         (row === 20 && col === 24)
       )
-        makeGhost(div);
+        makeSpecial(div, 'death');
       if (row === landRows + 1) {
         if (col % 20 === 0) makeTree(row, col);
         else if (col % 13 === 0) makeStone(row, col);
         else if (col === 8 || col === 33) makeHouse(row, col);
         else if (col === 17) makeFire(row, col);
-        else makeSky(div);
+        else makeSpecial(div, 'sky');
       } else {
-        if (row === landRows) makeTopLand(div);
-        else if (row < landRows) makeDirt(div);
-        else makeSky(div);
+        if (row === landRows) makeSpecial(div, 'topland');
+        else if (row < landRows) makeSpecial(div, 'dirt');
+        else makeSpecial(div, 'sky');
       }
     }
   }
@@ -132,15 +131,7 @@ function checkBefore() {
 function checkToolFit(tool, div) {
   toolType = tool.classList[0];
   landType = div.classList[1];
-  if (
-    (toolType === 'axe' && (landType === 'wood' || landType === 'leaves')) ||
-    (toolType === 'pickaxe' && landType === 'stone') ||
-    (toolType === 'water' && landType === 'fire') ||
-    (toolType === 'shovel' &&
-      (landType === 'dirt' || landType === 'topland')) ||
-    (toolType === 'sword' && landType === 'death') ||
-    (toolType === 'hammer' && landType === 'bracet')
-  ) {
+  if (tools[toolType].includes(landType)) {
     div.classList.add('sky');
     div.classList.remove(`${landType}`);
     let resourceP = document.querySelector(`[class='${landType} click']`)
@@ -150,6 +141,7 @@ function checkToolFit(tool, div) {
     showErorr(tool);
   }
 }
+
 function showErorr(div) {
   div.classList.add('worngTool');
   setTimeout(() => div.classList.remove('worngTool'), 400);
