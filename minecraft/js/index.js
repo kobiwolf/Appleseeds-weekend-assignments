@@ -8,7 +8,7 @@ let exit = document.querySelector('.exit');
 
 // functions
 function startOver() {
-  location.reload();
+  makeMap(4, 44, 25);
 }
 function startGame() {
   firstPage.style.visibility = 'hidden';
@@ -82,9 +82,9 @@ function checkIfReachable(div) {
   return booli;
 }
 function makeMap(landRows, width = 44, heigth = 25) {
-  let cubeW = Math.floor(world.scrollWidth / 30);
+  // let cubeW = Math.floor(world.scrollWidth / 30);
+  // let cubeH = Math.floor(world.scrollHeight / 30);
   cubeW = width;
-  let cubeH = Math.floor(world.scrollHeight / 30);
   cubeH = heigth;
   world.style.gridTemplateColumns = `repeat(${cubeW},1fr)`;
   world.style.gridTemplateRows = `repeat(${cubeH},1fr)`;
@@ -136,7 +136,7 @@ function checkToolFit(tool, div) {
     (toolType === 'axe' && (landType === 'wood' || landType === 'leaves')) ||
     (toolType === 'pickaxe' && landType === 'stone') ||
     (toolType === 'water' && landType === 'fire') ||
-    (toolType === 'shavel' &&
+    (toolType === 'shovel' &&
       (landType === 'dirt' || landType === 'topland')) ||
     (toolType === 'sword' && landType === 'death') ||
     (toolType === 'hammer' && landType === 'bracet')
@@ -170,7 +170,6 @@ function divClick(e) {
     before = div;
     return;
   }
-
   if (ifToolOrResourcedPressed(div) || !checkIfReachable(div)) return;
   if (before.classList[1] !== 'click') return;
   if (checkBefore() === 'tool') {
@@ -183,7 +182,6 @@ restartBut.addEventListener('click', startOver);
 exit.addEventListener('click', closePage);
 
 let before;
-
 if (world.scrollWidth < 400) {
   alert('for best game experience you sholud rotate the phone and reload');
   makeMap(10, 30, 25);
