@@ -184,8 +184,10 @@ exit.addEventListener('click', closePage);
 
 let before;
 
-if (world.scrollWidth < 400) makeMap(10, 30, 25);
-else makeMap(4, 44, 25);
+if (world.scrollWidth < 400) {
+  alert('for best game experience you sholud rotate the phone and reload');
+  makeMap(10, 30, 25);
+} else makeMap(4, 44, 25);
 let map = document.querySelectorAll('.click');
 map.forEach((div) => {
   div.addEventListener('click', (e) => {
