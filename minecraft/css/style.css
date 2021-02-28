@@ -284,9 +284,7 @@ p {
       'left  right'
       'middle middle ';
   }
-  /* .navbar > div {
-    transform: translateX(-5rem);
-  } */
+
   .middle-nav {
     transform: translateX(-5rem);
   }
@@ -296,5 +294,8 @@ p {
   }
   .world {
     width: 100vw;
+  }
+  .game {
+    height: 100%;
   }
 }
