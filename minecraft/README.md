@@ -1,4 +1,4 @@
-![pic of start game](/img/afterwelcomepage.png)
+![pic of start game] (/img/afterwelcomepage.png)
 
 # MineCraft
 
