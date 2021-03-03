@@ -1,6 +1,6 @@
-![pic of start game] (https://github.com/kobiwolf/Appleseeds-weekend-assignments/tree/master/minecraft/img/afterwelcomepage.png)
+![pic of start game](https://github.com/kobiwolf/Appleseeds-weekend-assignments/tree/master/minecraft/img/afterwelcomepage.png)
 
-                                        #MineCraft
+#MineCraft
 
 ##Thing to design:
 
