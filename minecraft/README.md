@@ -1,4 +1,4 @@
-![pic of start game] (/img/afterwelcomepage.png)
+![pic of start game](/img/afterwelcomepage.png)
 
 # MineCraft
 
@@ -20,10 +20,12 @@ Each tree\stone\house will hace its own constractor func
 A bit of animation
 About us button
 
-##Specail-Tools:
-sword,water
+## Specail-Tools:
+1. sword
+2. water
 
-##Special-resources:
-Ghost,fire
+## Special-resources:
+1. Ghost
+2. fire
 
 Make the form of the web before starting! -->
