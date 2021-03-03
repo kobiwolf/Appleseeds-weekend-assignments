@@ -1,4 +1,4 @@
-![pic of start game](/img/afterwelcomepage.png)
+![pic of start game](https://github.com/kobiwolf/Appleseeds-weekend-assignments/blob/master/minecraft/img/afterwelcomepage.png)
 
 # MineCraft
 
