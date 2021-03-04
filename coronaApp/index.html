@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Corona app</title>
+  </head>
+  <body>
+    <div class="info hidden">
+      <div class="totalCases">
+        <h2>total Cases</h2>
+        <p class="totalCasesP"></p>
+      </div>
+      <div class="newCases">
+        <h2>new Cases</h2>
+        <p class="newCasesP"></p>
+      </div>
+      <div class="totalDeaths">
+        <h2>total Deaths</h2>
+        <p class="totalDeathsP"></p>
+      </div>
+      <div class="newDeaths">
+        <h2>new Deaths</h2>
+        <p class="newDeathsP"></p>
+      </div>
+      <div class="totalRecover">
+        <h2>total Recover</h2>
+        <p class="totalRecoverP"></p>
+      </div>
+      <div class="critical">
+        <h2>critical</h2>
+        <p class="criticalP"></p>
+      </div>
+    </div>
+    <div class="chartDiv">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div class="upperDivBut"></div>
+    <div class="buttonDiv">
+      <button class="Asia">Asia</button>
+      <button class="Americas">Americas</button>
+      <button class="Africa">Africa</button>
+      <button class="Europe">Europe</button>
+      <button class="World">World</button>
+    </div>
+    <div class="linksDiv"></div>
+    <div class="img"><img src="./corona.jpg" alt="" /></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

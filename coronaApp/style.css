@@ -1,0 +1,83 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+button {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+}
+button:hover {
+  cursor: pointer;
+}
+.buttonDiv,
+.upperDivBut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+p {
+  display: inline-block;
+  margin-right: 10px;
+}
+p:hover {
+  cursor: pointer;
+}
+.info > div {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+}
+.info {
+  display: flex;
+  justify-content: space-around;
+  margin: 3rem 0;
+}
+.hidden {
+  display: none;
+}
+h2 {
+  text-align: center;
+}
+@media screen and (max-width: 400px) {
+  :root {
+    font-size: 10px;
+  }
+  .img {
+    margin: 5rem auto;
+  }
+  .linksDiv {
+    margin-top: 4rem;
+  }
+  .buttonDiv {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.linksDiv {
+  text-align: center;
+}
+.img {
+  width: 17rem;
+  height: 10rem;
+  display: block;
+  margin: 5rem auto;
+}
+img {
+  width: 17rem;
+  height: 10rem;
+  animation: round 3s linear 0s infinite normal forwards;
+}
+canvas {
+  max-height: 700px !important;
+}
+@keyframes round {
+  to {
+    transform: rotate(360deg);
+  }
+}
