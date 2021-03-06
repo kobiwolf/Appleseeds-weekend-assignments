@@ -74,7 +74,9 @@ img {
   animation: round 3s linear 0s infinite normal forwards;
 }
 canvas {
-  max-height: 700px !important;
+  margin: auto;
+  max-height: 800px !important;
+  max-width: 1300px !important;
 }
 @keyframes round {
   to {
