@@ -1,4 +1,4 @@
-![screenShot]https://github.com/kobiwolf/Appleseeds-weekend-assignments/blob/master/coronaApp/img/screenshot.png)
+![screenShot](https://github.com/kobiwolf/Appleseeds-weekend-assignments/blob/master/coronaApp/img/screenshot.png)
 
 # Coron App
 
