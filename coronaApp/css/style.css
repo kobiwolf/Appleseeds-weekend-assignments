@@ -3,14 +3,27 @@
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  max-width: 900px;
+  margin: auto;
+}
+h2 {
+  text-align: center;
+}
 button {
   margin: 1rem;
   padding: 0.5rem 1rem;
   background-color: black;
   color: white;
+  border-radius: 10%;
 }
 button:hover {
   cursor: pointer;
+}
+canvas {
+  margin: auto;
+  max-height: 800px !important;
+  max-width: 1300px !important;
 }
 .buttonDiv,
 .upperDivBut {
@@ -18,15 +31,20 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
-p {
+.buttonDiv > button {
+  font-size: 1.2rem;
+}
+.linksDiv > p {
   display: inline-block;
   margin-right: 10px;
+  text-decoration: underline;
+  color: rgb(57, 38, 168);
 }
-p:hover {
+.linksDiv > p:hover {
   cursor: pointer;
 }
 .info > div {
-  border: 1px solid black;
+  background-color: rgba(128, 128, 128, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -36,13 +54,52 @@ p:hover {
 .info {
   display: flex;
   justify-content: space-around;
-  margin: 3rem 0;
+  margin: 3rem auto;
 }
 .hidden {
   display: none;
 }
-h2 {
+
+.linksDiv {
   text-align: center;
+  margin: auto;
+}
+
+.img {
+  width: 17rem;
+  height: 10rem;
+  display: block;
+  margin: 5rem auto;
+}
+.icon {
+  width: 17rem;
+  height: 10rem;
+  animation: round 3s linear 0s infinite normal forwards;
+}
+
+.flag {
+  height: 3rem;
+  width: 5rem;
+  size: 100% 100%;
+}
+.totalDeathsP {
+  color: red;
+}
+.totalRecoverP {
+  color: green;
+}
+@keyframes round {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cityName {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 @media screen and (max-width: 400px) {
   :root {
@@ -53,33 +110,15 @@ h2 {
   }
   .linksDiv {
     margin-top: 4rem;
+    margin-bottom: 5rem;
   }
   .buttonDiv {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
-}
-.linksDiv {
-  text-align: center;
-}
-.img {
-  width: 17rem;
-  height: 10rem;
-  display: block;
-  margin: 5rem auto;
-}
-img {
-  width: 17rem;
-  height: 10rem;
-  animation: round 3s linear 0s infinite normal forwards;
-}
-canvas {
-  margin: auto;
-  max-height: 800px !important;
-  max-width: 1300px !important;
-}
-@keyframes round {
-  to {
-    transform: rotate(360deg);
+  .flag {
+    height: 5rem;
+    width: 7rem;
   }
 }

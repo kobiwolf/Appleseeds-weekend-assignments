@@ -27,6 +27,8 @@ const chart = new Chart(myChart, {
 const urlCountry = 'https://restcountries.herokuapp.com/api/v1';
 const urlCorona = 'http://corona-api.com/countries';
 const proxy = 'https://api.codetabs.com/v1/proxy?quest=';
+const urlFlagStart = `https://www.countryflags.io/`;
+const urlFlagEnd = '/shiny/64.png';
 const citiesFilter = [];
 const get = (type) => document.querySelector(type);
 const create = (type) => document.createElement(type);
@@ -46,6 +48,9 @@ const totalRecoverP = get('.totalRecoverP');
 const criticalP = get('.criticalP');
 const body = get('body');
 const chartDiv = get('.chartDiv');
+const h1 = get('h1');
+const flag = get('.flag');
+const cityDiv = get('.cityDiv');
 
 safe();
 
@@ -70,11 +75,13 @@ function erorrHandle(error) {
 async function getAllCountries() {
   let allcountry = await fetch(`${proxy}${urlCountry}`);
   allcountry = await allcountry.json();
+
   allcountry.forEach((country) => {
     const cityFilter = {
       name: country.name.common,
       code: country.cca2,
       region: country.region,
+      flag: `${urlFlagStart}${country.cca2}${urlFlagEnd}`,
     };
     citiesFilter.push(cityFilter);
   });
@@ -128,7 +135,7 @@ function createOneBut(regionArr, name) {
 
 function changeChart(regionArr, parameter = 'confirmed') {
   chartDiv.classList.remove('hidden');
-  infoDiv.classList.add('hidden');
+  cityDiv.classList.add('hidden');
   chart.data.labels = [];
   chart.data.datasets[0].data = [];
   regionArr.forEach((country) => {
@@ -145,13 +152,15 @@ function presnetCities(region) {
     p.innerText = `${city.name},  `;
     p.addEventListener('click', () => {
       chartDiv.classList.add('hidden');
+      h1.innerText = city.name;
+      flag.src = city.flag;
       totalCasesP.innerText = city.confirmed;
       newCasessP.innerText = city.newConfirmed;
       totalDeathsP.innerText = city.deaths;
       newDeathsP.innerText = city.newDeath;
       totalRecoverP.innerText = city.recovered;
       criticalP.innerText = city.critical;
-      infoDiv.classList.remove('hidden');
+      cityDiv.classList.remove('hidden');
     });
     lowerDiv.appendChild(p);
   });

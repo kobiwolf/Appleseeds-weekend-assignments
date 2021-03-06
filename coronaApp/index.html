@@ -5,33 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" href="./img/corona.jpg" />
     <title>Corona app</title>
   </head>
   <body>
-    <div class="info hidden">
-      <div class="totalCases">
-        <h2>total Cases</h2>
-        <p class="totalCasesP"></p>
+    <div class="cityDiv hidden">
+      <div class="cityName">
+        <h1></h1>
+        <img class="flag" src="" alt="flag" />
       </div>
-      <div class="newCases">
-        <h2>new Cases</h2>
-        <p class="newCasesP"></p>
-      </div>
-      <div class="totalDeaths">
-        <h2>total Deaths</h2>
-        <p class="totalDeathsP"></p>
-      </div>
-      <div class="newDeaths">
-        <h2>new Deaths</h2>
-        <p class="newDeathsP"></p>
-      </div>
-      <div class="totalRecover">
-        <h2>total Recover</h2>
-        <p class="totalRecoverP"></p>
-      </div>
-      <div class="critical">
-        <h2>critical</h2>
-        <p class="criticalP"></p>
+      <div class="info">
+        <div class="totalCases">
+          <h2>Total Cases</h2>
+          <p class="totalCasesP"></p>
+        </div>
+        <div class="newCases">
+          <h2>New Cases</h2>
+          <p class="newCasesP"></p>
+        </div>
+        <div class="totalDeaths">
+          <h2>Total Deaths</h2>
+          <p class="totalDeathsP"></p>
+        </div>
+        <div class="newDeaths">
+          <h2>New Deaths</h2>
+          <p class="newDeathsP"></p>
+        </div>
+        <div class="totalRecover">
+          <h2>Total Recover</h2>
+          <p class="totalRecoverP"></p>
+        </div>
+        <div class="critical">
+          <h2>critical</h2>
+          <p class="criticalP"></p>
+        </div>
       </div>
     </div>
     <div class="chartDiv">
@@ -46,7 +53,9 @@
       <button class="World">World</button>
     </div>
     <div class="linksDiv"></div>
-    <div class="img"><img src="./img/corona.jpg" alt="pic of corona" /></div>
+    <div class="img">
+      <img class="icon" src="./img/corona.jpg" alt="pic of corona" />
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="./js/app.js"></script>
