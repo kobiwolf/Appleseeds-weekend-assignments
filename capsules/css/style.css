@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
 }
 
 /* design by type */
@@ -14,8 +15,21 @@ button:hover {
   cursor: pointer;
 }
 body {
-  background-color: deepskyblue;
-  color: white;
+  background-image: url('../img/backgournd.jpg');
+  background-size: 100vw 100vh;
+  background-repeat: repeat-y;
+  position: relative;
+}
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 p {
   margin-left: 0.5rem;
@@ -25,17 +39,31 @@ h1 {
   margin-bottom: 1rem;
 }
 label {
-  color: black;
+  color: blanchedalmond;
 }
 input,
 select {
+  color: black;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.699);
 }
+option,
+select {
+  color: black;
+}
 /* design by class */
+.header {
+  display: flex;
+  justify-content: space-around;
+}
+.header > button {
+  margin: auto 0.5rem;
+  padding: 0.5rem 0.6rem;
+  background-color: rgba(3, 10, 10, 0.7);
+}
 .info {
   display: grid;
-  max-width: 90%;
+  max-width: 75%;
   grid-template-columns: repeat(10, 1fr);
   margin: auto;
 }
@@ -68,10 +96,11 @@ body > form {
 .container > div {
   margin: 0.5rem auto;
   border-radius: 15px;
-  background-color: rgba(15, 149, 190, 0.801);
+  background-color: #01bac0c0;
+  transition: all 0.2s ease-in-out;
 }
 .container > div:hover {
-  transform: scale(1.4);
+  transform: scale(1.3);
   max-width: 65%;
 }
 
@@ -85,7 +114,30 @@ body > form {
 .hidden {
   display: none;
 }
+/* the spinner */
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: 50vh;
+  left: 45vw;
+}
+.red button {
+  color: red !important;
+}
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* responsive design */
 @media screen and (max-width: 750px) {
   :root {

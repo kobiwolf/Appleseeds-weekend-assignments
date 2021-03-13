@@ -5,17 +5,21 @@ const headersDiv = getEl('.container_Heads');
 const dataUrl = 'https://apple-seeds.herokuapp.com/api/users/';
 const searchArea = getEl('#search');
 const select = getEl('select');
+const spinner = getEl('.loader');
+const clearBut = getEl('.clear');
+let deleteKobi;
 let allData = [];
 // localStorage.clear();
 let myStorage = window.localStorage;
 console.log(myStorage);
 
+// transfering data from the local storage if exsit
 if (myStorage.length) {
   allData = myStorage.data;
   allData = JSON.parse(allData);
 }
 safeRun();
-
+// the meaning of safe run it's-runs the asyncs funcs with catch
 async function safeRun() {
   if (!myStorage.length) {
     await fetchData().catch(handleError);
@@ -24,6 +28,7 @@ async function safeRun() {
 }
 // the fetching area
 async function fetchData() {
+  spinner.classList.remove('hidden');
   let data = await fetch(`${dataUrl}`);
   data = await data.json();
   for (let i = 0; i < data.length; i++) {
@@ -33,12 +38,12 @@ async function fetchData() {
     data[i].city = extraInfo.city;
     data[i].gender = extraInfo.gender;
     data[i].hobby = extraInfo.hobby;
-    data[i].delete = 'S';
-    data[i].edit = 'S';
+    data[i].delete = null;
+    data[i].edit = null;
     allData.push(data[i]);
   }
-  console.log(allData);
   myStorage.setItem('data', JSON.stringify(allData));
+  spinner.classList.add('hidden');
 }
 function handleError(error) {
   console.log(`you have a error:${error}`);
@@ -48,6 +53,9 @@ function handleError(error) {
 function displayData() {
   displayTableHeads();
   displayStudents();
+  // the next 2 lines are suprise for later
+  deleteKobi = getEl("[data-delete='13']");
+  cantTouchKobi();
 }
 function displayTableHeads() {
   const arrOfHeads = Object.keys(allData[0]);
@@ -134,7 +142,9 @@ function makeEditButs(line, cube) {
   saveBut.classList.add('hidden');
   saveBut.innerText = 'Save';
   cube.appendChild(saveBut);
-  saveBut.addEventListener('click', () => saveEvent(catchLineCubes(line)));
+  saveBut.addEventListener('click', () =>
+    saveEvent(catchLineCubes(line), line.getAttribute('id'))
+  );
 }
 function editEvent(line) {
   let lineCubes = catchLineCubes(line);
@@ -142,8 +152,8 @@ function editEvent(line) {
   toggleDisplayOfChildren(lineCubes.buttons);
 }
 function catchLineCubes(line) {
-  const fName = getEl(`[data-first-name='${line.id}']`);
-  const LName = getEl(`[data-last-name='${line.id}']`);
+  const firstName = getEl(`[data-first-name='${line.id}']`);
+  const lastName = getEl(`[data-last-name='${line.id}']`);
   const capsule = getEl(`[data-capsule='${line.id}']`);
   const age = getEl(`[data-age='${line.id}']`);
   const city = getEl(`[data-city='${line.id}']`);
@@ -153,8 +163,8 @@ function catchLineCubes(line) {
   const editDiv = getEl(`[data-edit='${line.id}']`);
   return {
     divs: {
-      fName,
-      LName,
+      firstName,
+      lastName,
       capsule,
       age,
       city,
@@ -181,7 +191,7 @@ function cancelEvent(cubes) {
   toggleDisplayOfChildren(cubes.divs);
   toggleDisplayOfChildren(cubes.buttons);
 }
-function saveEvent(cubes) {
+function saveEvent(cubes, id) {
   toggleDisplayOfChildren(cubes.buttons);
   let divs = Object.values(cubes.divs);
   divs.forEach((div) => {
@@ -191,6 +201,14 @@ function saveEvent(cubes) {
     input.classList.add('hidden');
     p.innerText = input.value;
   });
+  const student = allData.find((student) => student.id.toString() === id);
+  updateStudentInfo(cubes.divs, student);
+  localStorage.setItem('data', JSON.stringify(allData));
+}
+function updateStudentInfo(divs, student) {
+  for (div in divs) {
+    student[div] = divs[div].firstElementChild.innerText;
+  }
 }
 function toggleDisplayOfChildren(obj) {
   let arrOfElements = Object.values(obj);
@@ -208,9 +226,27 @@ function toggleDisplayOfChildren(obj) {
 }
 searchArea.addEventListener('input', () => {
   infoDiv.innerHTML = '';
+  const searchValue = new RegExp(`${searchArea.value}`, 'i');
   allData.forEach((student) => {
-    if (student[select.value].toString().includes(`${searchArea.value}`)) {
-      makeStudentLine(student);
-    }
+    searchValue.test(student[select.value]) && makeStudentLine(student);
   });
 });
+clearBut.addEventListener('click', () => {
+  if (
+    confirm('Are you sure you want to clear?all your changes will be removed!')
+  ) {
+    localStorage.clear();
+    location.reload();
+  }
+});
+function cantTouchKobi() {
+  deleteKobi.classList.add('red');
+  deleteKobi.addEventListener('click', (e) => {
+    e.stopPropagation();
+    alert("YOU THINK YOU CAN SHUT ME DOWN????I'LL SHUT YOU DOWN!");
+    setTimeout(() => {
+      localStorage.clear();
+      location.reload();
+    }, 4);
+  });
+}
