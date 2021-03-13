@@ -2,66 +2,102 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+/* design by type */
 button {
   padding: 0.5rem 0.6rem;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 button:hover {
   cursor: pointer;
 }
 body {
-  background-color: ivory;
+  background-color: deepskyblue;
+  color: white;
 }
-.info {
-  display: grid;
-  max-width: 70%;
-  grid-template-columns: repeat(10, 1fr);
-  margin: auto;
-}
-.info > div {
-  margin-top: 0.2rem;
-}
-.bold {
-  font-weight: bolder;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.container input {
-  width: 90%;
-}
-.hidden {
-  display: none;
-}
-.container_Heads > div:hover {
-  cursor: pointer;
+p {
+  margin-left: 0.5rem;
 }
 h1 {
   text-align: center;
   margin-bottom: 1rem;
 }
-form {
-  display: flex;
-  justify-content: center;
-}
 label {
   color: black;
+}
+input,
+select {
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.699);
+}
+/* design by class */
+.info {
+  display: grid;
+  max-width: 90%;
+  grid-template-columns: repeat(10, 1fr);
+  margin: auto;
+}
+.info > div {
+  margin-top: 0.3rem;
+}
+
+.container input {
+  width: 90%;
+}
+
+body > form {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
+.container_Heads > div:hover {
+  cursor: pointer;
 }
 .container button {
   background-color: inherit;
   border-radius: 10%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-style: italic;
-  border: 0.01px black solid;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
 }
 .container > div {
   margin: 0.5rem auto;
-  border-radius: 5%;
-  border: 1px rgba(146, 146, 86, 0.205) solid;
-  background-color: rgba(146, 146, 86, 0.116);
+  border-radius: 15px;
+  background-color: rgba(15, 149, 190, 0.801);
 }
+.container > div:hover {
+  transform: scale(1.4);
+  max-width: 65%;
+}
+
+/* utl */
+.bold {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.hidden {
+  display: none;
+}
+
+/* responsive design */
 @media screen and (max-width: 750px) {
   :root {
+    font-size: 10px;
+  }
+  .info {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  button {
+    padding: 0.2rem 0.3rem;
     font-size: 10px;
   }
 }

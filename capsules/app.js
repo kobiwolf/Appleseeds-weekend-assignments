@@ -190,7 +190,6 @@ function saveEvent(cubes) {
     p.classList.remove('hidden');
     input.classList.add('hidden');
     p.innerText = input.value;
-    console.log(div.geta);
   });
 }
 function toggleDisplayOfChildren(obj) {
