@@ -1,0 +1,16 @@
+.current {
+  width: max-content;
+  height: max-content;
+  text-align: center;
+  font-size: 1.6rem;
+}
+.turn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 70%;
+}
+.current_first {
+  background-color: blue;
+}

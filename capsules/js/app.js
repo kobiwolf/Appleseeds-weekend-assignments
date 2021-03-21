@@ -9,7 +9,6 @@ const spinner = getEl('.loader');
 const clearBut = getEl('.clear');
 let deleteKobi;
 let allData = [];
-// localStorage.clear();
 let myStorage = window.localStorage;
 console.log(myStorage);
 

@@ -1,0 +1,22 @@
+* {
+  color: white;
+}
+.screen {
+  width: 100%;
+  height: 100vh;
+  padding: 3rem 7rem;
+  background-image: url('../../img/IMG-20210320-WA0009.jpg');
+  background-size: 100% 100%;
+  position: relative;
+  z-index: 1;
+}
+.screen::after {
+  content: '';
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.288);
+}

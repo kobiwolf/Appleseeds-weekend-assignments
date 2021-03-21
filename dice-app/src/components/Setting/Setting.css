@@ -1,0 +1,7 @@
+.setting {
+  display: flex;
+  justify-content: space-between;
+}
+.setting > button {
+  color: red;
+}
