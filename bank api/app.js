@@ -6,9 +6,11 @@ const {
   findUser,
   saveData,
   getData,
+  isNum,
+  transition,
 } = require('./utis');
-const app = express();
 
+const app = express();
 app.use(express.json());
 app.set('port', process.env.port || 3000);
 
@@ -32,12 +34,26 @@ app.get(`${endPoint}/:id`, (req, res) => {
 app.post(endPoint, (req, res) => {
   try {
     createUser(req.body);
-    res.send(`${JSON.stringify(req.body)} has successfully updated`);
+    res.send(`${JSON.stringify(req.body)} has successfully saved`);
   } catch (e) {
     res.send(e.message);
   }
 });
-app.post(`${endPoint}/transfer`, (req, res) => {});
+app.post(`${endPoint}/transfer`, (req, res) => {
+  const { from, to, amount } = req.query;
+  if (!from || !to || !amount)
+    res.status(400).send('At least one of the queries is missing');
+  else {
+    try {
+      const fromUser = findUser(from);
+      const toUser = findUser(to);
+      const money = isNum(amount);
+      const transfer = transition(fromUser, toUser, money);
+    } catch (e) {
+      res.send(e.message);
+    }
+  }
+});
 app.delete(`${endPoint}/:id`, (req, res) => {
   const { id } = req.params;
   try {

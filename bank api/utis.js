@@ -18,12 +18,17 @@ const saveData = (value) => {
     }
   });
 };
-// const updateUser = (value, id) => {
-//   const picked = findUser(id);
-//   if (picked.id) {
-//     picked.cash -= value;
-//   }
-// };
+const updateUser = (value, id) => {
+  const data = getData();
+  const index = data.findIndex((user) => user.id === id);
+  if (index !== -1) {
+    data[index] = value;
+    saveData(data);
+    return 'user has update';
+  } else {
+    throw new Error('cannot find user');
+  }
+};
 
 const findUser = (id) => {
   const data = getData();
@@ -37,18 +42,42 @@ const deleteUser = (id) => {
   const index = data.findIndex((user) => user.id === id);
   if (index !== -1) {
     data.splice(index, 1);
-    try {
-      saveData(data);
-    } catch (e) {
-      throw new Error('can not save data...pls try again later');
-    }
-    return `user has removed `;
+    saveData(data);
+    return 'user has removed';
   }
-  throw new Error('cannot find user');
+  throw new Error('can not save data...pls try again later');
 };
 const createUser = (value) => {
   const data = getData();
   data.push(value);
   saveData(data);
 };
-module.exports = { createUser, deleteUser, findUser, saveData, getData };
+const isNum = (value) => {
+  const money = parseInt(value);
+  if (money) return money;
+  throw new Error('amount must be a number');
+};
+
+const upDateCredit = (id, newCredit) => {
+  try {
+    const user = findUser(id);
+    user.credit = newCredit;
+    updateUser(user);
+    return 'credit has been updated';
+  } catch (e) {
+    return e.message;
+  }
+};
+const transition = (from, to, money) => {
+  return 'ok';
+};
+module.exports = {
+  createUser,
+  deleteUser,
+  findUser,
+  saveData,
+  getData,
+  isNum,
+  transition,
+  upDateCredit,
+};
