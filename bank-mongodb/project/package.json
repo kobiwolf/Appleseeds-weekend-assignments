@@ -10,7 +10,7 @@
     "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master",
     "both": "concurrently \"npm run client\" \"npm run server\"",
     "copy": "cp -r client/build server/",
-    "toheroku": "npm run build --prefix client&&npm run copy && git add .&&  git commit -m %npm_config_first% && git push heroku main",
+    "toheroku": "npm run build --prefix client&&npm run copy && git add .&& git commit -m %npm_config_first% && git push heroku main",
     "master": "echo %npm_config_BUILD_DIR%"
   },
   "keywords": [],
