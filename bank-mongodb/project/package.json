@@ -9,9 +9,9 @@
     "server": "nodemon ./server/app.js",
     "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master",
     "both": "concurrently \"npm run client\" \"npm run server\"",
-    "toheroku": "npm run build --prefix client&&git add .&&  git commit -m %npm_config_first% && git push heroku master",
-    "master": "echo %npm_config_BUILD_DIR%",
-    "copy": "cp client/build server/"
+    "copy": "cp -r client/build server/",
+    "toheroku": "npm run build --prefix client&&npm run copy && git add .&&  git commit -m %npm_config_first% && git push heroku master",
+    "master": "echo %npm_config_BUILD_DIR%"
   },
   "keywords": [],
   "author": "",
