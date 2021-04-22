@@ -1,12 +1,26 @@
 const express = require('express');
-const route = new express.Router();
+const User = require('../model/user');
 
+const {
+  createUser,
+  deleteUser,
+  findUser,
+  saveData,
+  getData,
+  isNum,
+  transition,
+  upDateCredit,
+  updateUser,
+  moneyAction,
+} = require('../utils/utils');
+
+const route = new express.Router();
 const endPoint = '/api/users';
 
 // get all users
-route.get(endPoint, (req, res) => {
+route.get(endPoint, async (req, res) => {
   try {
-    const data = getData();
+    const data = await getData();
     res.send(data);
   } catch (e) {
     res.status(200).send(e.message);
@@ -32,21 +46,21 @@ route.get(`${endPoint}/filter/`, (req, res) => {
   }
 });
 // get one user
-route.get(`${endPoint}/:id`, (req, res) => {
+route.get(`${endPoint}/:id`, async (req, res) => {
   const { id } = req.params;
   try {
-    const answer = findUser(id);
-    res.send(answer);
+    const answer = await User.findById(id);
+    answer ? res.send(answer) : res.status(404).send('user not found');
   } catch (e) {
     res.status(404).send(e.message);
   }
 });
 
 // create user
-route.post(endPoint, (req, res) => {
+route.post(endPoint, async (req, res) => {
   try {
-    createUser(req.body);
-    res.send(`${JSON.stringify(req.body)} has successfully saved`);
+    const user = await createUser(req.body);
+    res.send(`${JSON.stringify(user)} has successfully saved`);
   } catch (e) {
     res.status(400).send(e.message);
   }

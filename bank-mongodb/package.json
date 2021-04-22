@@ -4,17 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo ",
+    "start": "node ./server/app.js",
     "client": "npm start --prefix client",
     "server": "nodemon ./server/app.js",
-    "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master"
+    "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master",
+    "both": "concurrently \"npm run client\" \"npm run server\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
+    "concurrently": "^6.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.12.5"
+    "mongoose": "^5.12.5",
+    "path": "^0.12.7",
+    "validator": "^13.6.0"
   }
 }
