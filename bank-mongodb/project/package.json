@@ -4,12 +4,13 @@
   "description": "",
   "main": "./server/app.js",
   "scripts": {
-    "start": "cd server && node app.js",
+    "start": " node server/app.js",
     "client": "npm start --prefix client",
     "server": "nodemon ./server/app.js",
     "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master",
     "both": "concurrently \"npm run client\" \"npm run server\"",
-    "toheroku": "npm run build --prefix client&&git add .&&  git commit -m %npm_config_first% && git push heroku master"
+    "toheroku": "npm run build --prefix client&&git add .&&  git commit -m %npm_config_first% && git push heroku master",
+    "master": "echo %npm_config_BUILD_DIR%"
   },
   "keywords": [],
   "author": "",
