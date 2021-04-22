@@ -4,7 +4,7 @@
   "description": "",
   "main": "./server/app.js",
   "scripts": {
-    "start": "cd server && node app.js",
+    "start": "cd ./bank-mongodb/project/server && node app.js",
     "client": "npm start --prefix client",
     "server": "nodemon ./server/app.js",
     "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master",
