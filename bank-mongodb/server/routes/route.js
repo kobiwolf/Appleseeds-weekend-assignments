@@ -5,12 +5,10 @@ const {
   createUser,
   deleteUser,
   findUser,
-  saveData,
   getData,
   isNum,
   transition,
   upDateCredit,
-  updateUser,
   moneyAction,
 } = require('../utils/utils');
 
@@ -66,20 +64,20 @@ route.post(endPoint, async (req, res) => {
   }
 });
 // transition
-route.post(`${endPoint}/transfer/`, (req, res) => {
+route.post(`${endPoint}/transfer/`, async (req, res) => {
   const { from, to, amount } = req.query;
   if (!from || !to || !amount)
-    res.status(400).send('At least one of the queries is missing');
-  else {
-    try {
-      const fromUser = findUser(from);
-      const toUser = findUser(to);
-      const money = isNum(amount);
-      const transfer = transition(fromUser, toUser, money);
-      res.send(transfer);
-    } catch (e) {
-      res.status(400).send(e.message);
-    }
+    res.status(400).end('At least one of the queries is missing');
+  try {
+    const fromUser = await User.findById(from);
+    const toUser = await User.findById(to);
+    if (!fromUser || !toUser)
+      res.status(404).end('at least one of the users are not exist');
+    const money = isNum(amount);
+    const transfer = await transition(fromUser, toUser, money);
+    res.send(transfer);
+  } catch (e) {
+    res.status(400).send(e.message);
   }
 });
 // change user is active
@@ -94,15 +92,15 @@ route.post(`${endPoint}/active/:id`, (req, res) => {
   } else res.status(400).send('can not find user');
 });
 // user credit and money change
-route.put(`${endPoint}/:id`, (req, res) => {
+route.put(`${endPoint}/:id`, async (req, res) => {
   const { id } = req.params;
   let { credit, amount } = req.query;
   credit = parseInt(credit);
   amount = parseInt(amount);
   let answer;
   try {
-    if (credit && !amount) answer = upDateCredit(id, credit);
-    else if (!credit && amount) answer = moneyAction(id, amount);
+    if (credit && !amount) answer = await upDateCredit(id, credit);
+    else if (!credit && amount) answer = await moneyAction(id, amount);
     answer
       ? res.send(answer)
       : res.status(400).send('you must put or valid amount or valid credit');

@@ -8,7 +8,8 @@
     "client": "npm start --prefix client",
     "server": "nodemon ./server/app.js",
     "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master",
-    "both": "concurrently \"npm run client\" \"npm run server\""
+    "both": "concurrently \"npm run client\" \"npm run server\"",
+    "toheroku": "npm run build --prefix client&&git add .&&  git commit -m %npm_config_first% && git push heroku master"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,3 @@
-const express = require('express');
-const axios = require('axios');
 const User = require('../model/user');
 const Transfer = require('../model/Transfer');
 
@@ -7,48 +5,17 @@ const getData = async (amount = null) => {
   const data = amount ? await User.find({ cash: amount }) : await User.find({});
   return data;
 };
-const saveData = (value) => {
-  const string = JSON.stringify(value);
-  fs.readFile(pathData, (err, data) => {
-    if (data) {
-      fs.writeFile(pathData, string, (error) => {
-        if (error)
-          throw new Error('did not manage to save the data...try again later');
-      });
-    } else {
-      throw new Error('did not manage to find the data,try again later  ');
-    }
-  });
-};
-const updateUser = (value, id) => {
-  //   const data = getData();
-  //   const index = data.findIndex((user) => user.id === id);
-  //   if (index !== -1) {
-  //     data[index] = value;
-  //     saveData(data);
-  //     return 'user has update';
-  //   } else {
-  //     throw new Error('cannot find user');
-  //   }
+const findUser = async (id) => {
+  const user = User.findById(id);
+  if (user?.isActive === 'false') throw new Error('this user is not active');
+  if (user) return user;
+  throw new Error('cannot find user');
 };
 
-const findUser = (id) => {
-  //   const data = getData();
-  //   const picked = data.find((user) => user.id === id);
-  //   if (picked?.isActive === 'false') throw new Error('this user is not active');
-  //   if (picked) return picked;
-  //   throw new Error('cannot find user');
-};
-
-const deleteUser = (id) => {
-  //   const data = getData();
-  //   const index = data.findIndex((user) => user.id === id);
-  //   if (index !== -1) {
-  //     data.splice(index, 1);
-  //     saveData(data);
-  //     return 'user has removed';
-  //   }
-  //   throw new Error('can not find user');
+const deleteUser = async (id) => {
+  const user = await User.findByIdAndDelete(id);
+  if (user) return 'user has removed';
+  throw new Error('can not find user');
 };
 const createUser = async (value) => {
   try {
@@ -69,65 +36,64 @@ const upDateCredit = async (id, credit) => {
   credit = parseInt(credit);
   if (credit < 0) throw new Error('need to put valid credit');
   try {
-    const user = await User.findByIdAndUpdate(id, {
-      $inc: { credit },
-    });
-
-    return 'credit has been updated';
+    const user = await User.findByIdAndUpdate(id, { credit });
+    if (user) return 'credit has been updated';
+    throw new Error('user not found');
   } catch (e) {
-    return e.message;
+    throw new Error(e);
   }
 };
-const transition = (from, to, money) => {
+const transition = async (from, to, money) => {
   if (money < 0) throw new Error('amount must be a positive num');
   if (from.money - money < from.credit)
     throw new Error(
-      `can not transfer from ${from.id}-doesn't have enough money`
+      `can not transfer from ${from._id}-doesn't have enough money`
     );
   try {
-    deposit(to.id, money);
-    draw(from.id, money);
+    await deposit(to.id, money);
+    await draw(from.id, money);
     return 'the transfer has been completed';
   } catch (e) {
-    return e;
+    throw new Error(e.message);
   }
 };
-const deposit = (id, amount) => {
+const deposit = async (id, cash) => {
   try {
-    const user = findUser(id);
-    user.money += amount;
-    updateUser(user, id);
-    return `user num:${id}, just got deposit ${amount}$`;
+    const user = await User.findByIdAndUpdate(id, { $inc: { cash } });
+    if (user) return `user num:${id}, just got deposit ${cash}$`;
+    throw new Error('user not found');
   } catch (e) {
     return e;
   }
 };
-const draw = (id, amount) => {
+const draw = async (id, cash) => {
   try {
-    const user = findUser(id);
-    user.money += amount;
-    if (user.money < user.credit)
-      return new Error('can not draw more money,your credit is too small');
-    updateUser(user, id);
-    return `draw has been successful,your money:${user.money}`;
+    let user = await User.findById(id);
+    if (!user) throw new Error('user not found');
+    if (user.cash + cash < user.credit)
+      throw new Error('can not draw more money,your credit is too small');
+    user = await User.findByIdAndUpdate(id, { $inc: { cash } }, { new: true });
+    return `draw has been successful,your money:${user.cash}`;
   } catch (e) {
-    return e;
+    throw new Error(e);
   }
 };
-const moneyAction = (id, amount) => {
-  const answer = amount >= 0 ? deposit(id, amount) : draw(id, amount);
-  if (answer.message) throw new Error(answer);
-  return answer;
+const moneyAction = async (id, amount) => {
+  try {
+    const answer =
+      amount >= 0 ? await deposit(id, amount) : await draw(id, amount);
+    return answer;
+  } catch (e) {
+    throw new Error(e.message);
+  }
 };
 module.exports = {
   createUser,
   deleteUser,
   findUser,
-  saveData,
   getData,
   isNum,
   transition,
   upDateCredit,
-  updateUser,
   moneyAction,
 };
