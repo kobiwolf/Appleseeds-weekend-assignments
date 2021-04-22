@@ -8,7 +8,7 @@
     "client": "npm start --prefix client",
     "server": "nodemon ./server/app.js",
     "togit": "git add . && git commit -m '%npm_config_commit%' && git push origin HEAD:master",
-    "commiti": "npm commit -m 'wow'"
+    "commiti": "git commit -m '%npm_config_commit%'"
   },
   "keywords": [],
   "author": "",
