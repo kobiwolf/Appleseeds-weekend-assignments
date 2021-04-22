@@ -7,7 +7,7 @@
     "test": "echo ",
     "client": "npm start --prefix client",
     "server": "nodemon ./server/app.js",
-    "togit": "git add . && git commit -m 'check' && git push"
+    "togit": "git add . && git commit -m 'check' && git push origin HEAD:master"
   },
   "keywords": [],
   "author": "",
