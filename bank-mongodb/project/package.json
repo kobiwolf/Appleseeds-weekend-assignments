@@ -4,7 +4,7 @@
   "description": "",
   "main": "./server/app.js",
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "cd server && node app.js",
     "client": "npm start --prefix client",
     "server": "nodemon ./server/app.js",
     "togit": "git add . && git commit -m %npm_config_first% && git push origin HEAD:master",
@@ -22,5 +22,8 @@
     "mongoose": "^5.12.5",
     "path": "^0.12.7",
     "validator": "^13.6.0"
+  },
+  "engines": {
+    "node": "14.16.1"
   }
 }
