@@ -6,7 +6,7 @@ const route = require('./routes/route');
 
 const app = express();
 const pathToClientBuild = path.join(__dirname, 'build');
-//try
+
 const port = process.env.PORT || 3001;
 app.use(express.static(pathToClientBuild));
 app.use(express.json());
